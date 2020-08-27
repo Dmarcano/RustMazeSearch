@@ -1,0 +1,10 @@
+name: rust_maze_solver
+version: "1.0"
+author: Diego Marcano
+about: Solves mazes of a specific file format
+args:
+    - maze_file: 
+        required: true
+        short: -m
+        long: --maze_file 
+        value_name: MAZE

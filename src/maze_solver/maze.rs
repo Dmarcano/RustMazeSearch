@@ -1,3 +1,4 @@
+use std::fs::File;
 
 pub struct MazePosition { 
     x : u64,
@@ -18,7 +19,7 @@ impl MazePosition {
 }
 
 impl Maze {
-    fn new(height : u64, width : u64) -> Maze{ 
+    fn new(height : u64, width : u64,  file : File) -> Maze{ 
         unimplemented!("Not imlemented making a maze!")
     }
 

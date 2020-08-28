@@ -1,7 +1,6 @@
 use std::io::BufReader;
 use std::io::BufRead;
 use std::fs::File;
-use std::path::Path;
 
 #[derive(Debug, PartialEq, Eq)]
 pub struct MazePosition { 
@@ -74,6 +73,8 @@ fn parse_maze_row(line : String, row_idx : u64, width : u64) -> Vec<MazePosition
 #[cfg(test)] 
 mod tests {
     use super::*;
+    use std::path::Path;
+
     #[test]
     fn  parse_maze_row_usual() {
         let row_str = String::from("..#.#");

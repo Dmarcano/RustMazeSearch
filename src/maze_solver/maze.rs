@@ -71,30 +71,33 @@ fn parse_maze_row(line : String, row_idx : u64, width : u64) -> Vec<MazePosition
 }
 
 
+#[cfg(test)] 
+mod tests {
+    use super::*;
+    #[test]
+    fn  parse_maze_row_usual() {
+        let row_str = String::from("..#.#");
+        let row_idx = 0;
+        let expected = vec![
+            MazePosition::new(0, 0, false),
+            MazePosition::new(1, 0, false),
+            MazePosition::new(2, 0, true),
+            MazePosition::new(3, 0, false),
+            MazePosition::new(4, 0, true),
+        ];
+        let actual = parse_maze_row(row_str, row_idx, 5);
+        
+        assert_eq!(expected, actual);
+    }
 
-#[test]
-fn  parse_maze_row_usual() {
-    let row_str = String::from("..#.#");
-    let row_idx = 0;
-    let expected = vec![
-        MazePosition::new(0, 0, false),
-        MazePosition::new(1, 0, false),
-        MazePosition::new(2, 0, true),
-        MazePosition::new(3, 0, false),
-        MazePosition::new(4, 0, true),
-    ];
-    let actual = parse_maze_row(row_str, row_idx, 5);
-    
-    assert_eq!(expected, actual);
-}
+    #[test]
+    fn parse_maze_test() {
+        let maze_row = vec![MazePosition::new(0, 0, false),MazePosition::new(1, 0, false),MazePosition::new(2, 0, false)];
+        let expected = Maze {height : 1, width : 3, maze : vec![maze_row]};
 
-#[test]
-fn parse_maze_test() {
-    let maze_row = vec![MazePosition::new(0, 0, false),MazePosition::new(1, 0, false),MazePosition::new(2, 0, false)];
-    let expected = Maze {height : 1, width : 3, maze : vec![maze_row]};
-
-    let path = Path::new("public/easy.txt");
-    let file = File::open(path).unwrap();
-    let actual = Maze::new(file);
-    assert_eq!(expected, actual)
+        let path = Path::new("public/easy.txt");
+        let file = File::open(path).unwrap();
+        let actual = Maze::new(file);
+        assert_eq!(expected, actual)
+    }
 }

@@ -1,5 +1,3 @@
 pub mod maze;
-
-pub fn run() { 
-    
-}
+pub mod solver;
+pub mod lib;

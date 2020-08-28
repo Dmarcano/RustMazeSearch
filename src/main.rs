@@ -1,11 +1,14 @@
 /**
  * The job for this program is to read in a .txt file which represents a maze 
  */
-mod maze_solver;
+use std::path::Path;
 
-use crate::maze_solver::maze;
+mod maze_solver;
+use crate::maze_solver::lib;
 
 
 fn main() {
-    println!("Hello, world!");
+    let path = Path::new("public/easy.txt");
+    lib::run(&path);
+    println!("Done!");
 }

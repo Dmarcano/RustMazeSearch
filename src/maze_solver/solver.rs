@@ -19,12 +19,12 @@ pub fn search_maze<'a>( mut exploration :  Vec< &'a MazePosition> , maze : &'a M
     exploration.push(start);
 
     while let Some(curr_cell) = exploration.pop() { 
-       seen_cells.insert(curr_cell);
-       maze.get_neighbors(curr_cell.x, curr_cell.y).iter()
-       .filter(|n| !seen_cells.contains(**n))
-       .for_each(|neighbor| {
-        println!("{:?}",neighbor);
-        exploration.push(neighbor);
+        println!("{:?}",curr_cell); // perform operation on maze cell
+        seen_cells.insert(curr_cell);
+        maze.get_neighbors(curr_cell.x, curr_cell.y).iter()
+        .filter(|n| !seen_cells.contains(**n) && !n.is_wall)
+        .for_each(|neighbor| {
+            exploration.push(neighbor);
        });
     }
 }

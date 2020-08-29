@@ -5,8 +5,8 @@ use super::maze::*;
 use super::solver::*;
 
 pub fn run (path : &Path) { 
-    // let file = File::open(path).unwrap();
-    // let maze = Maze::new(file);
-    // let exploration = Vec::new();
-    // solve_dfs(exploration, &maze);
+    let file = File::open(path).unwrap();
+    let maze = Maze::new(file);
+    let exploration = Vec::new();
+    search_maze(exploration, &maze);
 }

@@ -8,7 +8,7 @@ use crate::maze_solver::lib;
 
 
 fn main() {
-    let path = Path::new("public/easy.txt");
+    let path = Path::new("public/example1.txt");
     lib::run(&path);
     println!("Done!");
 }

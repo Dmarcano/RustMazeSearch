@@ -51,7 +51,6 @@ impl Maze {
         self.maze.get(y as usize).unwrap().get(x as usize).unwrap()
     }
 
-
     pub fn get_neighbors(&self, x : u64, y : u64) -> Vec<&MazePosition>{ 
         let mut neighbors = Vec::new();
 

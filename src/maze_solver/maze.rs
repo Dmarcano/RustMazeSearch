@@ -16,7 +16,6 @@ pub struct Maze {
     height : u64
 }
 
-
 impl MazePosition { 
     fn new(x : u64, y : u64, is_wall :bool) -> MazePosition { 
         MazePosition { x, y, is_wall}

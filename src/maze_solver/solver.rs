@@ -12,7 +12,7 @@ pub trait Exploration {
 }
 
 
-pub fn solve_dfs<'a,T>( mut exploration :  Vec< &'a MazePosition> , maze : &'a Maze ) where T : Exploration { 
+pub fn solve_dfs<'a>( mut exploration :  Vec< &'a MazePosition> , maze : &'a Maze ) where { 
     let mut seen_cells : HashSet<&MazePosition> = HashSet::new();
     // let mut exploration = Vec::new();
     let start = maze.get(0, 0);

@@ -46,9 +46,10 @@ impl Maze {
     }
 
     pub fn get(&self, x : u64, y : u64) -> &MazePosition{ 
-        unimplemented!("Not implemented getting a maze cell from maze!")
+        self.maze.get(y as usize).unwrap().get(x as usize).unwrap()
     }
 
+    
     pub fn get_neighbors(&self, x : u64, y : u64) -> Vec<&MazePosition>{ 
         unimplemented!();
     }
@@ -104,5 +105,15 @@ mod tests {
         let file = File::open(path).unwrap();
         let actual = Maze::new(file);
         assert_eq!(expected, actual)
+    }
+
+    #[test]
+    fn get() {
+        unimplemented!();
+    }
+
+    #[test]
+    fn get_neighbirs() {
+        unimplemented!();
     }
 }

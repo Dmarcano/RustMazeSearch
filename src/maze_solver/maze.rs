@@ -55,15 +55,22 @@ impl Maze {
     pub fn get_neighbors(&self, x : u64, y : u64) -> Vec<&MazePosition>{ 
         let mut neighbors = Vec::new();
 
-        // TODO handle overflow case 
-        for row_idx in y-1..y+2 {
-            for col_idx in x-1..x+2 {
-                // TODO get only top right bottom left
-                if self.valid_index(col_idx, row_idx) && (row_idx != y || col_idx != x) {
-                    neighbors.push(self.get(col_idx, row_idx));
-                }
-            }
-        };
+        // top 
+        if y > 0 && self.valid_index(x, y -1) { 
+            neighbors.push(self.get(x, y-1));
+        }
+        //right 
+        if self.valid_index(x + 1, y) {
+            neighbors.push(self.get(x+1, y));
+        }
+        // bottom 
+        if self.valid_index(x , y + 1) {
+            neighbors.push(self.get(x, y + 1));
+        }
+        //left 
+        if x > 0 && self.valid_index(x - 1, y) { 
+            neighbors.push(self.get(x - 1, y));
+        }
         neighbors
     }
 
@@ -169,14 +176,52 @@ mod tests {
         let actual_maze = Maze::new(file);
 
         // get neighbors of middle of maze
-        // let middle_neighbors = actual_maze.get_neighbors(1, 1);
-        let middle_neighbors = actual_maze.get_neighbors(0, 0);
+        let middle_neighbors = actual_maze.get_neighbors(1, 1);
+        // let middle_neighbors = actual_maze.get_neighbors(0, 0);
+        let expected_neighbors = vec! {
+            &MazePosition{x : 1, y :0, is_wall: true}, // top
+            &MazePosition{x : 2, y :1, is_wall: false}, // right 
+            &MazePosition{x : 1, y :2, is_wall: false}, // bottom
+            &MazePosition{x : 0, y :1, is_wall: false}, // left
+        };
+        assert_eq!(expected_neighbors, middle_neighbors);
+    }
 
-        // middle_neighbors.iter().for_each(|n|  println!("{:?}", n) );
-        for n in middle_neighbors {
-            println!("{:?}", n);
-        }
+    #[test]
+    fn get_neighbors_edges() {
+        let path = Path::new("public/example1.txt");
+        let file = File::open(path).unwrap();
+        let actual_maze = Maze::new(file);
 
-        assert_eq!(1+1, 2)
+        // get neighbors of middle of maze
+        let top_left = actual_maze.get_neighbors(0, 0);
+        let bottom_left = actual_maze.get_neighbors(0, 2);
+        let top_right = actual_maze.get_neighbors(4, 0);
+        let bottom_right = actual_maze.get_neighbors(4, 2);
+        
+        let expected_top_left = vec! {
+            &MazePosition{x : 1, y :0, is_wall: true}, // right
+            &MazePosition{x : 0, y :1, is_wall: false}, // botom 
+        };
+
+        let expected_bottom_left = vec! {
+            &MazePosition{x : 0, y :1, is_wall: false}, // top
+            &MazePosition{x : 1, y :2, is_wall: false}, // right 
+        };
+
+        let expected_top_right = vec! {
+            &MazePosition{x : 4, y :1, is_wall: false}, // bottom
+            &MazePosition{x : 3, y :0, is_wall: true}, // left
+        };
+
+        let expected_bottom_right = vec! {
+            &MazePosition{x : 4, y :1, is_wall: false}, // top
+            &MazePosition{x : 3, y :2, is_wall: true}, // left
+        };
+
+        assert_eq!(expected_top_left, top_left);
+        assert_eq!(expected_bottom_left, bottom_left);
+        assert_eq!(expected_top_right, top_right);
+        assert_eq!(expected_bottom_right, bottom_right);
     }
 }

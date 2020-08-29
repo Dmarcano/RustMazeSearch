@@ -24,14 +24,15 @@ impl<T> Exploration<T> for Vec<T> {
 }
 
 
-pub fn search_maze<'a, T>( mut exploration :  T , maze : &'a Maze ) where T : Exploration<&'a MazePosition> { 
+
+pub fn search_maze<'a, T>( mut exploration :  T , maze : &'a Maze, func : fn(&MazePosition) ) where T : Exploration<&'a MazePosition> { 
     let mut seen_cells : HashSet<&MazePosition> = HashSet::new();
     let start = maze.get(0, 0);
     seen_cells.insert(start);
     exploration.give(start);
 
     while let Some(curr_cell) = exploration.take() { 
-        println!("{:?}",curr_cell); // perform operation on maze cell
+        func(curr_cell); // perform operation on maze cell
         seen_cells.insert(curr_cell);
         maze.get_neighbors(curr_cell.x, curr_cell.y).iter()
         .filter(|n| !seen_cells.contains(**n) && !n.is_wall)

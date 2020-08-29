@@ -54,14 +54,11 @@ impl Maze {
 
     pub fn get_neighbors(&self, x : u64, y : u64) -> Vec<&MazePosition>{ 
         let mut neighbors = Vec::new();
-        let mut num_y_iters = 0;
-        let mut num_iters =0;
+
         // TODO handle overflow case 
         for row_idx in y-1..y+2 {
-            num_y_iters += 1;
             for col_idx in x-1..x+2 {
                 // TODO get only top right bottom left
-                num_iters += 1;
                 if self.valid_index(col_idx, row_idx) && (row_idx != y || col_idx != x) {
                     neighbors.push(self.get(col_idx, row_idx));
                 }

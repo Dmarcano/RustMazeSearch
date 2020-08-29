@@ -193,7 +193,6 @@ mod tests {
         let file = File::open(path).unwrap();
         let actual_maze = Maze::new(file);
 
-        // get neighbors of middle of maze
         let top_left = actual_maze.get_neighbors(0, 0);
         let bottom_left = actual_maze.get_neighbors(0, 2);
         let top_right = actual_maze.get_neighbors(4, 0);

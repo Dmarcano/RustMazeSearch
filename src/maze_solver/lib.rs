@@ -5,12 +5,16 @@ use std::collections::VecDeque;
 use super::maze::*;
 use super::solver::*;
 
-pub fn run (path : &Path) { 
+pub fn run (path : &Path, algo : SearchAlgo) { 
     let file = File::open(path).unwrap();
     let maze = Maze::new(file);
-    let exploration = Vec::new();
-    search_maze(exploration, &maze, print_cell);
+
+    match algo {
+        SearchAlgo::BFS => {search_maze(VecDeque::new(), &maze, print_cell);}
+        SearchAlgo::DFS => {search_maze(Vec::new(), &maze, print_cell);}
+    };
 }
+
 
 pub enum SearchAlgo { 
     DFS, 

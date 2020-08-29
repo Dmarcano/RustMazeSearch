@@ -3,7 +3,7 @@ use std::collections::HashSet;
 use std::collections::VecDeque;
 
 /**
- * The Exploration trait is responsible for exploring a Maze Interpretation
+ * Trait that corresponds to a structure which can search a Maze over a generic Type T
  */
 pub trait Exploration<T> {
     fn give(&mut self, val : T);
@@ -11,6 +11,7 @@ pub trait Exploration<T> {
     fn take(&mut self) -> Option<T>;
 }
 
+// uses a Vec as a Stack for exploring a Maze of any type T
 impl<T> Exploration<T> for Vec<T> { 
 
     fn give(&mut self, val : T ){
@@ -23,6 +24,7 @@ impl<T> Exploration<T> for Vec<T> {
 
 }
 
+// uses a VecDeque as a Queue for exploring a Maze of type T
 impl<T> Exploration<T> for VecDeque<T> { 
 
     fn give(&mut self, val : T ){
@@ -34,6 +36,7 @@ impl<T> Exploration<T> for VecDeque<T> {
     }
 }
 
+// Search a Maze using a structure which implements Maze exploration, performing a function on every Maze cell found
 pub fn search_maze<'a, T>( mut exploration :  T , maze : &'a Maze, func : fn(&MazePosition) ) where T : Exploration<&'a MazePosition> { 
     let mut seen_cells : HashSet<&MazePosition> = HashSet::new();
     let start = maze.get(0, 0);

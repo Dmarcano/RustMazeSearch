@@ -15,6 +15,12 @@ impl<'a> MazePositionDisplay<'a> {
     }
 }
 
+impl<'a> MazeDisplay for MazePositionDisplay<'a> {
+    fn print_maze_position(cell : &MazePosition) { 
+        unimplemented!("Have to implement Maze display for Maze position")
+    }
+}
+
 /**
  * Trait for displaying information based on a given cells
  */

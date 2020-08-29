@@ -9,7 +9,8 @@ use std::fs::File;
 pub struct MazePosition { 
     pub x : u64,
     pub y: u64,   
-    pub is_wall : bool 
+    pub is_wall : bool, 
+    pub is_goal : bool
 }
 
 /**
@@ -23,8 +24,8 @@ pub struct Maze {
 }
 
 impl MazePosition { 
-    fn new(x : u64, y : u64, is_wall :bool) -> MazePosition { 
-        MazePosition { x, y, is_wall}
+    fn new(x : u64, y : u64, is_wall :bool, is_goal : bool) -> MazePosition { 
+        MazePosition { x, y, is_wall, is_goal}
     }
 }
 
@@ -113,7 +114,7 @@ fn parse_maze_row(line : String, row_idx : u64, width : u64) -> Vec<MazePosition
                 println!("unknown character in maze file! row: {}, col {} Assuming it is not a wall...", row_idx, col_idx as u64)
             }
         }
-        row.push( MazePosition::new(col_idx as u64, row_idx, is_wall )  )
+        row.push( MazePosition::new(col_idx as u64, row_idx, is_wall, false )  )
     }
     row
 }
@@ -129,11 +130,11 @@ mod tests {
         let row_str = String::from("..#.#");
         let row_idx = 0;
         let expected = vec![
-            MazePosition::new(0, 0, false),
-            MazePosition::new(1, 0, false),
-            MazePosition::new(2, 0, true),
-            MazePosition::new(3, 0, false),
-            MazePosition::new(4, 0, true),
+            MazePosition::new(0, 0, false, false),
+            MazePosition::new(1, 0, false, false),
+            MazePosition::new(2, 0, true, false),
+            MazePosition::new(3, 0, false, false),
+            MazePosition::new(4, 0, true, false),
         ];
         let actual = parse_maze_row(row_str, row_idx, 5);
         
@@ -142,7 +143,7 @@ mod tests {
 
     #[test]
     fn parse_maze_test() {
-        let maze_row = vec![MazePosition::new(0, 0, false),MazePosition::new(1, 0, false),MazePosition::new(2, 0, false)];
+        let maze_row = vec![MazePosition::new(0, 0, false, false),MazePosition::new(1, 0, false, false),MazePosition::new(2, 0, false, false)];
         let expected = Maze {height : 1, width : 3, maze : vec![maze_row]};
 
         let path = Path::new("public/easy.txt");
@@ -157,9 +158,9 @@ mod tests {
         let file = File::open(path).unwrap();
         let actual_maze = Maze::new(file);
 
-        assert_eq!(actual_maze.get(0, 0), &MazePosition{x : 0, y : 0 , is_wall : false});
-        assert_eq!(actual_maze.get(1, 0), &MazePosition{x : 1, y : 0 , is_wall : false});
-        assert_eq!(actual_maze.get(2, 0), &MazePosition{x : 2, y : 0 , is_wall : false});
+        assert_eq!(actual_maze.get(0, 0), &MazePosition{x : 0, y : 0 , is_wall : false, is_goal : false});
+        assert_eq!(actual_maze.get(1, 0), &MazePosition{x : 1, y : 0 , is_wall : false, is_goal : false});
+        assert_eq!(actual_maze.get(2, 0), &MazePosition{x : 2, y : 0 , is_wall : false, is_goal : false});
 
     }
 
@@ -170,17 +171,17 @@ mod tests {
         let actual_maze = Maze::new(file);
 
         // left column
-        assert_eq!(actual_maze.get(0, 0), &MazePosition{x : 0, y : 0 , is_wall : false});
-        assert_eq!(actual_maze.get(0, 1), &MazePosition{x : 0, y : 1 , is_wall : false});
-        assert_eq!(actual_maze.get(0, 2), &MazePosition{x : 0, y : 2 , is_wall : false});
+        assert_eq!(actual_maze.get(0, 0), &MazePosition{x : 0, y : 0 , is_wall : false, is_goal : false});
+        assert_eq!(actual_maze.get(0, 1), &MazePosition{x : 0, y : 1 , is_wall : false, is_goal : false});
+        assert_eq!(actual_maze.get(0, 2), &MazePosition{x : 0, y : 2 , is_wall : false, is_goal : false});
         // right coloumn 
-        assert_eq!(actual_maze.get(4, 0), &MazePosition{x : 4, y : 0 , is_wall : false});
-        assert_eq!(actual_maze.get(4, 1), &MazePosition{x : 4, y : 1 , is_wall : false});
-        assert_eq!(actual_maze.get(4, 2), &MazePosition{x : 4, y : 2 , is_wall : false});
+        assert_eq!(actual_maze.get(4, 0), &MazePosition{x : 4, y : 0 , is_wall : false, is_goal : false});
+        assert_eq!(actual_maze.get(4, 1), &MazePosition{x : 4, y : 1 , is_wall : false, is_goal : false});
+        assert_eq!(actual_maze.get(4, 2), &MazePosition{x : 4, y : 2 , is_wall : false, is_goal : false});
         // middle column (column 2) of maze 
-        assert_eq!(actual_maze.get(1, 0), &MazePosition{x : 1, y : 0 , is_wall : true});
-        assert_eq!(actual_maze.get(1, 1), &MazePosition{x : 1, y : 1 , is_wall : true});
-        assert_eq!(actual_maze.get(1, 2), &MazePosition{x : 1, y : 2, is_wall : false});
+        assert_eq!(actual_maze.get(1, 0), &MazePosition{x : 1, y : 0 , is_wall : true, is_goal : false});
+        assert_eq!(actual_maze.get(1, 1), &MazePosition{x : 1, y : 1 , is_wall : true, is_goal : false});
+        assert_eq!(actual_maze.get(1, 2), &MazePosition{x : 1, y : 2, is_wall : false, is_goal : false});
     }
 
     #[test]
@@ -193,10 +194,10 @@ mod tests {
         let middle_neighbors = actual_maze.get_neighbors(1, 1);
         // let middle_neighbors = actual_maze.get_neighbors(0, 0);
         let expected_neighbors = vec! {
-            &MazePosition{x : 1, y :0, is_wall: true}, // top
-            &MazePosition{x : 2, y :1, is_wall: false}, // right 
-            &MazePosition{x : 1, y :2, is_wall: false}, // bottom
-            &MazePosition{x : 0, y :1, is_wall: false}, // left
+            &MazePosition{x : 1, y :0, is_wall: true, is_goal : false}, // top
+            &MazePosition{x : 2, y :1, is_wall: false, is_goal : false}, // right 
+            &MazePosition{x : 1, y :2, is_wall: false, is_goal : false}, // bottom
+            &MazePosition{x : 0, y :1, is_wall: false, is_goal : false}, // left
         };
         assert_eq!(expected_neighbors, middle_neighbors);
     }
@@ -213,23 +214,23 @@ mod tests {
         let bottom_right = actual_maze.get_neighbors(4, 2);
         
         let expected_top_left = vec! {
-            &MazePosition{x : 1, y :0, is_wall: true}, // right
-            &MazePosition{x : 0, y :1, is_wall: false}, // botom 
+            &MazePosition{x : 1, y :0, is_wall: true, is_goal : false}, // right
+            &MazePosition{x : 0, y :1, is_wall: false, is_goal : false}, // botom 
         };
 
         let expected_bottom_left = vec! {
-            &MazePosition{x : 0, y :1, is_wall: false}, // top
-            &MazePosition{x : 1, y :2, is_wall: false}, // right 
+            &MazePosition{x : 0, y :1, is_wall: false, is_goal : false}, // top
+            &MazePosition{x : 1, y :2, is_wall: false, is_goal : false}, // right 
         };
 
         let expected_top_right = vec! {
-            &MazePosition{x : 4, y :1, is_wall: false}, // bottom
-            &MazePosition{x : 3, y :0, is_wall: true}, // left
+            &MazePosition{x : 4, y :1, is_wall: false, is_goal : false}, // bottom
+            &MazePosition{x : 3, y :0, is_wall: true, is_goal : false}, // left
         };
 
         let expected_bottom_right = vec! {
-            &MazePosition{x : 4, y :1, is_wall: false}, // top
-            &MazePosition{x : 3, y :2, is_wall: true}, // left
+            &MazePosition{x : 4, y :1, is_wall: false, is_goal : false}, // top
+            &MazePosition{x : 3, y :2, is_wall: true, is_goal : false}, // left
         };
 
         assert_eq!(expected_top_left, top_left);

@@ -5,10 +5,15 @@ use std::path::Path;
 
 mod maze_solver;
 use crate::maze_solver::lib;
+use clap::{App, load_yaml};
+
 
 
 fn main() {
-    let path = Path::new("public/example1.txt");
+    let yaml = load_yaml!("cli.yml");
+    let matches = App::from_yaml(yaml).get_matches();
+    let path = Path::new(matches.value_of("maze_file").unwrap());
+    let algo = matches.value_of("algorithm").unwrap();
     lib::run(&path);
     println!("Done!");
 }

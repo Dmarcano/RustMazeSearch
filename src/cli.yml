@@ -10,6 +10,6 @@ args:
         value_name: MAZE
     - algorithm: 
         required: true
-        short: -m
-        long: --maze_file 
-        value_name: MAZE
+        short: -a
+        long: --algorithm 
+        value_name: ALGO

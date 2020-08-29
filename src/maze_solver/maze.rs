@@ -2,13 +2,19 @@ use std::io::BufReader;
 use std::io::BufRead;
 use std::fs::File;
 
-#[derive(Debug, PartialEq, Eq, Hash)]
+/**
+ * A representation for a cell within a Maze to search
+ */
+#[derive(Debug, PartialEq, Eq, Hash, Copy, Clone)]
 pub struct MazePosition { 
     pub x : u64,
     pub y: u64,   
     pub is_wall : bool 
 }
 
+/**
+ * A representation for a Maze to search for
+ */
 #[derive(Debug, PartialEq, Eq)]
 pub struct Maze { 
     maze : Vec<Vec<MazePosition>>,
@@ -22,9 +28,15 @@ impl MazePosition {
     }
 }
 
-
-
 impl Maze {
+    /**
+     * Creates a new maze from a file that corresponds to a specific layout
+     * 
+     * <li>
+     *  #
+     * 
+     * </li>
+     */
     pub fn new(file : File) -> Maze{ 
         let reader = BufReader::new(file); 
         let mut width : u64 = 0;  
@@ -47,6 +59,9 @@ impl Maze {
         Maze {maze, width, height}
     }
 
+    /**
+     * 
+     */
     pub fn get(&self, x : u64, y : u64) -> &MazePosition{ 
         self.maze.get(y as usize).unwrap().get(x as usize).unwrap()
     }

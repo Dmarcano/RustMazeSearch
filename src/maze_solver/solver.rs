@@ -12,16 +12,19 @@ pub trait Exploration {
 }
 
 
-pub fn solve<'a,T>( mut exploration :  Vec< &'a MazePosition> , maze : &'a Maze ) where T : Exploration { 
+pub fn solve_dfs<'a,T>( mut exploration :  Vec< &'a MazePosition> , maze : &'a Maze ) where T : Exploration { 
     let mut seen_cells : HashSet<&MazePosition> = HashSet::new();
     // let mut exploration = Vec::new();
-
     let start = maze.get(0, 0);
     seen_cells.insert(start);
     exploration.push(start);
 
     while let Some(curr_cell) = exploration.pop() { 
        seen_cells.insert(curr_cell);
-    
+       for neighbor in maze.get_neighbors(curr_cell.x, curr_cell.y){
+            // perform function
+            println!("{:?}",neighbor);
+            exploration.push(neighbor);
+       }
     }
 }

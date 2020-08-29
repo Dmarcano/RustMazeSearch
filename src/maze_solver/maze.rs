@@ -4,9 +4,9 @@ use std::fs::File;
 
 #[derive(Debug, PartialEq, Eq, Hash)]
 pub struct MazePosition { 
-    x : u64,
-    y: u64,   
-    is_wall : bool 
+    pub x : u64,
+    pub y: u64,   
+    pub is_wall : bool 
 }
 
 #[derive(Debug, PartialEq, Eq)]
@@ -50,7 +50,7 @@ impl Maze {
         unimplemented!("Not implemented getting a maze cell from maze!")
     }
 
-    pub fn get_neighbors(&self, x : u64, y : u64) -> Vec<MazePosition>{ 
+    pub fn get_neighbors(&self, x : u64, y : u64) -> Vec<&MazePosition>{ 
         unimplemented!();
     }
 }

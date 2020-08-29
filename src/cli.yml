@@ -8,3 +8,8 @@ args:
         short: -m
         long: --maze_file 
         value_name: MAZE
+    - algorithm: 
+        required: true
+        short: -m
+        long: --maze_file 
+        value_name: MAZE

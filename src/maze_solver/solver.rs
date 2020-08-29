@@ -1,6 +1,6 @@
 use super::maze::*;
 use std::collections::HashSet;
-
+use std::collections::VecDeque;
 
 /**
  * The Exploration trait is responsible for exploring a Maze Interpretation
@@ -23,7 +23,16 @@ impl<T> Exploration<T> for Vec<T> {
 
 }
 
+impl<T> Exploration<T> for VecDeque<T> { 
 
+    fn give(&mut self, val : T ){
+        self.push_back(val);
+    }
+
+    fn take(&mut self) -> Option<T> {
+        self.pop_front()
+    }
+}
 
 pub fn search_maze<'a, T>( mut exploration :  T , maze : &'a Maze, func : fn(&MazePosition) ) where T : Exploration<&'a MazePosition> { 
     let mut seen_cells : HashSet<&MazePosition> = HashSet::new();

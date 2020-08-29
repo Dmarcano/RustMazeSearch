@@ -22,6 +22,8 @@ impl MazePosition {
     }
 }
 
+
+
 impl Maze {
     pub fn new(file : File) -> Maze{ 
         let reader = BufReader::new(file); 
@@ -49,9 +51,33 @@ impl Maze {
         self.maze.get(y as usize).unwrap().get(x as usize).unwrap()
     }
 
-    
+
     pub fn get_neighbors(&self, x : u64, y : u64) -> Vec<&MazePosition>{ 
-        unimplemented!();
+        let mut neighbors = Vec::new();
+        let mut num_y_iters = 0;
+        let mut num_iters =0;
+        // TODO handle overflow case 
+        for row_idx in y-1..y+2 {
+            num_y_iters += 1;
+            for col_idx in x-1..x+2 {
+                // TODO get only top right bottom left
+                num_iters += 1;
+                if self.valid_index(col_idx, row_idx) && (row_idx != y || col_idx != x) {
+                    neighbors.push(self.get(col_idx, row_idx));
+                }
+            }
+        };
+        neighbors
+    }
+
+    fn valid_index(&self, x : u64, y : u64) -> bool{
+        let num_rows = self.maze.len() as u64;
+        let num_cols = self.maze.get(0).unwrap().len() as u64;
+        match (x,y) { 
+            (_, y) if y >= num_rows => {false}
+            (x, _) if x >= num_cols => {false}
+            (_, _) => {true}
+        }
     }
 }
 
@@ -108,12 +134,52 @@ mod tests {
     }
 
     #[test]
-    fn get() {
-        unimplemented!();
+    fn get_row_maze() {
+        let path = Path::new("public/easy.txt");
+        let file = File::open(path).unwrap();
+        let actual_maze = Maze::new(file);
+
+        assert_eq!(actual_maze.get(0, 0), &MazePosition{x : 0, y : 0 , is_wall : false});
+        assert_eq!(actual_maze.get(1, 0), &MazePosition{x : 1, y : 0 , is_wall : false});
+        assert_eq!(actual_maze.get(2, 0), &MazePosition{x : 2, y : 0 , is_wall : false});
+
     }
 
     #[test]
-    fn get_neighbirs() {
-        unimplemented!();
+    fn get_matrix_maze() { 
+        let path = Path::new("public/example1.txt");
+        let file = File::open(path).unwrap();
+        let actual_maze = Maze::new(file);
+
+        // left column
+        assert_eq!(actual_maze.get(0, 0), &MazePosition{x : 0, y : 0 , is_wall : false});
+        assert_eq!(actual_maze.get(0, 1), &MazePosition{x : 0, y : 1 , is_wall : false});
+        assert_eq!(actual_maze.get(0, 2), &MazePosition{x : 0, y : 2 , is_wall : false});
+        // right coloumn 
+        assert_eq!(actual_maze.get(4, 0), &MazePosition{x : 4, y : 0 , is_wall : false});
+        assert_eq!(actual_maze.get(4, 1), &MazePosition{x : 4, y : 1 , is_wall : false});
+        assert_eq!(actual_maze.get(4, 2), &MazePosition{x : 4, y : 2 , is_wall : false});
+        // middle column (column 2) of maze 
+        assert_eq!(actual_maze.get(1, 0), &MazePosition{x : 1, y : 0 , is_wall : true});
+        assert_eq!(actual_maze.get(1, 1), &MazePosition{x : 1, y : 1 , is_wall : true});
+        assert_eq!(actual_maze.get(1, 2), &MazePosition{x : 1, y : 2, is_wall : false});
+    }
+
+    #[test]
+    fn get_neighbors() {
+        let path = Path::new("public/example1.txt");
+        let file = File::open(path).unwrap();
+        let actual_maze = Maze::new(file);
+
+        // get neighbors of middle of maze
+        // let middle_neighbors = actual_maze.get_neighbors(1, 1);
+        let middle_neighbors = actual_maze.get_neighbors(0, 0);
+
+        // middle_neighbors.iter().for_each(|n|  println!("{:?}", n) );
+        for n in middle_neighbors {
+            println!("{:?}", n);
+        }
+
+        assert_eq!(1+1, 2)
     }
 }

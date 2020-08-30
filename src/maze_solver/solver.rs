@@ -1,7 +1,6 @@
 use super::maze::*;
 use std::collections::HashSet;
 use std::collections::VecDeque;
-use std::hash::Hash;
 
 /**
  * Trait that corresponds to a structure which can search a Maze over a generic Type T

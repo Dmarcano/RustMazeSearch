@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="CargoProjects">
+    <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f53c810d-f029-47aa-83a2-4c582a484e8f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/maze_solver/maze/maze_position.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/maze_solver/maze/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/maze_solver/display.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/maze_solver/display.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/maze_solver/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/maze_solver/lib.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/maze_solver/maze.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/maze_solver/solver.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/maze_solver/solver.rs" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Rust File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="84h12p64" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1gnRR6P3FxkaK9DxoNEX1wMhZes" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="org.rust.cargo.project.model.PROJECT_DISCOVERY" value="true" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/maze_solver/maze" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Cargo Command.Test maze::tests">
+    <configuration name="Test maze::tests" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
+      <option name="channel" value="DEFAULT" />
+      <option name="command" value="test --package rust_maze_search --bin rust_maze_search maze_solver::maze::tests" />
+      <option name="allFeatures" value="false" />
+      <option name="emulateTerminal" value="false" />
+      <option name="backtrace" value="SHORT" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
+      <envs />
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test maze_solver::maze::tests::get_neighbors_edges" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
+      <option name="channel" value="DEFAULT" />
+      <option name="command" value="test --package rust_maze_search --bin rust_maze_search maze_solver::maze::tests::get_neighbors_edges -- --exact" />
+      <option name="allFeatures" value="false" />
+      <option name="emulateTerminal" value="false" />
+      <option name="backtrace" value="SHORT" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
+      <envs />
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Cargo Command.Test maze::tests" />
+        <item itemvalue="Cargo Command.Test maze_solver::maze::tests::get_neighbors_edges" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="RustProjectSettings">
+    <option name="toolchainHomeDirectory" value="$USER_HOME$/.cargo/bin" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f53c810d-f029-47aa-83a2-4c582a484e8f" name="Default Changelist" comment="" />
+      <created>1598748360364</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1598748360364</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1238" height="76" key="GridCell.Tab.0.bottom" timestamp="1598748867236">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1238" height="76" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1598748867236" />
+    <state width="1238" height="76" key="GridCell.Tab.0.center" timestamp="1598748867235">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1238" height="76" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1598748867235" />
+    <state width="1238" height="76" key="GridCell.Tab.0.left" timestamp="1598748867234">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1238" height="76" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1598748867234" />
+    <state width="1238" height="76" key="GridCell.Tab.0.right" timestamp="1598748867235">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1238" height="76" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1598748867235" />
+  </component>
+</project>

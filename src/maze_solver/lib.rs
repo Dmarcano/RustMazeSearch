@@ -10,7 +10,7 @@ use super::solver::*;
  */
 pub fn run (path : &Path, algo : SearchAlgo) { 
     let file = File::open(path).unwrap();
-    let maze = Maze::new(file);
+    let maze = MazePositionMaze::new(file);
 
     match algo {
         SearchAlgo::BFS => {search_maze(VecDeque::new(), &maze, print_cell);}

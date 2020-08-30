@@ -5,12 +5,12 @@ use super::maze::*;
  * with the maze
  */
 pub struct MazePositionDisplay<'a> { // we have lifetime of Struct that goes along with the reference
-    maze : &'a Maze,
+    maze : &'a MazePositionMaze,
     delay : u32
 }
 
 impl<'a> MazePositionDisplay<'a> { 
-    pub fn new(maze :  &'a Maze, delay : u32) -> MazePositionDisplay { 
+    pub fn new(maze :  &'a MazePositionMaze, delay : u32) -> MazePositionDisplay {
         MazePositionDisplay{maze, delay}
     }
 }

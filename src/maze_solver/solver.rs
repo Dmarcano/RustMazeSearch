@@ -37,7 +37,7 @@ impl<T> Exploration<T> for VecDeque<T> {
 }
 
 // Search a Maze using a structure which implements Maze exploration, performing a function on every Maze cell found
-pub fn search_maze<'a, T>( mut exploration :  T , maze : &'a Maze, func : fn(&MazePosition) ) where T : Exploration<&'a MazePosition> { 
+pub fn search_maze<'a, T>(mut exploration :  T, maze : &'a MazePositionMaze, func : fn(&MazePosition) ) where T : Exploration<&'a MazePosition> {
     let mut seen_cells : HashSet<&MazePosition> = HashSet::new();
     let start = maze.get(0, 0);
     seen_cells.insert(start);

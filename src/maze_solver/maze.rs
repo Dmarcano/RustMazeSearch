@@ -119,6 +119,10 @@ fn parse_maze_row(line : String, row_idx : u64, width : u64) -> Vec<MazePosition
     row
 }
 
+// helper for IntoIter
+struct MazeIntoIter { 
+
+}
 
 #[cfg(test)] 
 mod tests {

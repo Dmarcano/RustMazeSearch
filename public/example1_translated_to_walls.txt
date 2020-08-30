@@ -1,0 +1,7 @@
+5 3
+.#.#.
+.#...
+...#.
+
+Now onto representation with wall 
+|down| -> |up/down| ->  [up/right] -> 

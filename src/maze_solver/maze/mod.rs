@@ -102,6 +102,29 @@ impl MazePositionMaze {
     }
 }
 
+/**
+* A trait representing a Maze for which one can get read only values that represent a Maze
+* which has a start and an end
+*/
+pub trait Maze<T> {
+    fn get_start(&self) -> &T;
+    fn get_neighbors(&self, val : &T) -> Vec<&T>;
+    fn get_end(&self) -> &T;
+}
+
+impl Maze<MazePosition> for MazePositionMaze {
+    fn get_start(&self) -> &MazePosition {
+        self.get(0,0)
+    }
+
+    fn get_neighbors(&self, val: &MazePosition) -> Vec<&MazePosition> {
+        self.get_neighbors(val.x, val.y)
+    }
+
+    fn get_end(&self) -> &MazePosition {
+        unimplemented!()
+    }
+}
 
 fn parse_maze_row(line : String, row_idx : u64, width : u64) -> Vec<MazePosition>{
     let mut row : Vec<MazePosition>=  Vec::with_capacity(width as usize);

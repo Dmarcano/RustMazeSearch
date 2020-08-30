@@ -1,6 +1,7 @@
 use super::maze::*;
 use std::collections::HashSet;
 use std::collections::VecDeque;
+use std::hash::Hash;
 
 /**
  * Trait that corresponds to a structure which can search a Maze over a generic Type T
@@ -37,16 +38,18 @@ impl<T> Exploration<T> for VecDeque<T> {
 }
 
 // Search a Maze using a structure which implements Maze exploration, performing a function on every Maze cell found
-pub fn search_maze<'a, T>(mut exploration :  T, maze : &'a MazePositionMaze, func : fn(&MazePosition) ) where T : Exploration<&'a MazePosition> {
+pub fn search_maze<'a, T, U>(mut exploration :  T, maze : &'a U, func : fn(&MazePosition) )
+    where T : Exploration<&'a MazePosition>,
+    U : Maze<MazePosition> {
     let mut seen_cells : HashSet<&MazePosition> = HashSet::new();
-    let start = maze.get(0, 0);
+    let start = maze.get_start();
     seen_cells.insert(start);
     exploration.give(start);
 
     while let Some(curr_cell) = exploration.take() { 
         func(curr_cell); // perform operation on maze cell
         seen_cells.insert(curr_cell);
-        maze.get_neighbors(curr_cell.x, curr_cell.y).iter()
+        maze.get_neighbors(curr_cell).iter()
         .filter(|n| !seen_cells.contains(**n) && !n.is_wall)
         .for_each(|neighbor| {
             exploration.give(neighbor);

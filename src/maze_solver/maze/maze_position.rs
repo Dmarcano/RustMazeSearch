@@ -65,7 +65,7 @@ impl MazePositionMaze {
         }
         neighbors
     }
-
+    
     fn valid_index(&self, x : u64, y : u64) -> bool{
         let num_rows = self.maze.len() as u64;
         let num_cols = self.maze.get(0).unwrap().len() as u64;

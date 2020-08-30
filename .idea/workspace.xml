@@ -24,6 +24,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f53c810d-f029-47aa-83a2-4c582a484e8f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/maze_solver/maze/maze_position.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/maze_solver/maze/maze_position.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/maze_solver/maze/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/maze_solver/maze/mod.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/maze_solver/solver.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/maze_solver/solver.rs" afterDir="false" />
     </list>
@@ -127,6 +128,7 @@
       <option name="presentableId" value="Default" />
       <updated>1598748360364</updated>
       <workItem from="1598754882278" duration="1845000" />
+      <workItem from="1598767271080" duration="1563000" />
     </task>
     <servers />
   </component>
@@ -146,10 +148,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="776" y="1336" key="#com.intellij.ide.util.MemberChooser" timestamp="1598755790636">
+    <state x="776" y="1336" key="#com.intellij.ide.util.MemberChooser" timestamp="1598768698217">
       <screen x="11" y="1080" width="1920" height="1080" />
     </state>
-    <state x="776" y="1336" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080/11.1080.1920.1080@11.1080.1920.1080" timestamp="1598755790636" />
+    <state x="776" y="1336" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080/11.1080.1920.1080@11.1080.1920.1080" timestamp="1598768698217" />
     <state width="1238" height="76" key="GridCell.Tab.0.bottom" timestamp="1598748867236">
       <screen x="0" y="0" width="1280" height="800" />
     </state>

@@ -51,9 +51,32 @@ impl Maze<MazePosition> for MazePositionMaze {
 }
 
 
-
-// helper for IntoIter
-struct MazeIntoIter {
-
+// helper for IntoIter for Maze Position
+pub struct MazePositionIntoIter {
+    iter: ::std::vec::IntoIter<MazePosition>
 }
+
+impl  IntoIterator for MazePositionMaze  {
+    type Item =  MazePosition;
+    type IntoIter = MazePositionIntoIter;
+
+    fn into_iter(self) -> Self::IntoIter {
+        MazePositionIntoIter{
+            iter : self.maze.into_iter()
+                .map(|v| v.into_iter())
+                .flatten()
+                .collect::<Vec<MazePosition>>()
+                .into_iter()
+        }
+    }
+}
+
+impl Iterator for MazePositionIntoIter {
+    type Item = MazePosition;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        self.iter.next()
+    }
+}
+
 

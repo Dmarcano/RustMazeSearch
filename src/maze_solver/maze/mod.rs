@@ -185,6 +185,34 @@ mod tests {
         assert_eq!(iter.next(), None);
     }
 
+    #[test]
+    fn iter_row_test() {
+        let num_rows = 2;
+        let num_cols = 3;
+        let rows = 0..num_rows;
+
+        let maze_vec = rows.map(
+            |r| {
+                create_maze_row(r, num_cols)
+            }
+        ).collect::<Vec<Vec<MazePosition>>>();
+
+        let maze = MazePositionMaze { maze : maze_vec, width : num_cols, height : num_rows};
+        let mut row_iter = maze.iter_row();
+        assert_eq!(Some(&vec![
+            MazePosition{x : 0, y: 0 , is_goal : false, is_wall: false},
+            MazePosition{x : 1, y: 0 , is_goal : false, is_wall: false},
+            MazePosition{x : 2, y: 0 , is_goal : false, is_wall: false}]), row_iter.next());
+
+        assert_eq!(Some(&vec![
+            MazePosition{x : 0, y: 1 , is_goal : false, is_wall: false},
+            MazePosition{x : 1, y: 1 , is_goal : false, is_wall: false},
+            MazePosition{x : 2, y: 1 , is_goal : false, is_wall: false}]), row_iter.next());
+
+        assert_eq!(None, row_iter.next())
+    
+    }
+
     fn create_maze_row(row_idx : u64, num_cols : u64) -> Vec<MazePosition> {
         let cols = 0..num_cols;
         cols.map( 

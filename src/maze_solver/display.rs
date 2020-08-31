@@ -16,7 +16,9 @@ impl<'a> MazePositionDisplay<'a> {
 }
 
 impl<'a> MazeDisplay for MazePositionDisplay<'a> {
-    fn print_maze_position(cell : &MazePosition) { 
+    fn print_maze_position(&self, cell : &MazePosition) { 
+        let iter = self.maze.iter();
+        
         unimplemented!("Have to implement Maze display for Maze position")
     }
 }
@@ -25,5 +27,5 @@ impl<'a> MazeDisplay for MazePositionDisplay<'a> {
  * Trait for displaying information based on a given cells
  */
 pub trait MazeDisplay {
-    fn print_maze_position(cell : &MazePosition);
+    fn print_maze_position(&self, cell : &MazePosition);
 }

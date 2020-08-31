@@ -51,7 +51,7 @@ impl Maze<MazePosition> for MazePositionMaze {
 }
 
 
-// helper for IntoIter for Maze Position
+// ===== MAZE POSITION INTO-ITER
 pub struct MazePositionIntoIter {
     iter: ::std::vec::IntoIter<MazePosition>
 }
@@ -73,13 +73,35 @@ impl  IntoIterator for MazePositionMaze  {
 
 impl Iterator for MazePositionIntoIter {
     type Item = MazePosition;
-
     fn next(&mut self) -> Option<Self::Item> {
         self.iter.next()
     }
 }
 
-// helper struct for Maze Iterator
+// ===== MAZE POSITION ROW ITER
+pub struct MazeRowIter<'a> { 
+    iter : ::std::slice::Iter<'a, Vec<MazePosition>>
+}
+
+impl <'a> Iterator for MazeRowIter<'a> { 
+    type Item = &'a Vec<MazePosition>;
+
+    fn next(&mut self) -> Option<Self::Item>{ 
+        self.iter.next()
+    }
+}
+
+impl MazePositionMaze { 
+
+    pub fn iter_row(&self) -> MazeRowIter{ 
+        MazeRowIter {
+             iter : self.maze.iter()
+        }
+    }
+}
+
+
+// ===== MAZE POSITION ITER
 pub struct MazePositionIter<'a> {
     maze : &'a MazePositionMaze,
     cur_row_idx : u64,
@@ -125,6 +147,9 @@ impl<'a> Iterator for MazePositionIter<'a> {
         } 
     }
 }
+
+// ===== MAZE POSITION 
+
 
 #[cfg(test)]
 mod tests { 

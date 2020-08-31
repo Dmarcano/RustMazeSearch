@@ -17,9 +17,23 @@ impl<'a> MazePositionDisplay<'a> {
 
 impl<'a> MazeDisplay for MazePositionDisplay<'a> {
     fn print_maze_position(&self, cell : &MazePosition) { 
-        let row_iter = self.maze.iter_rows() ;
-        
-        unimplemented!("Have to implement Maze display for Maze position")
+        let row_iter = self.maze.iter_rows() ;  
+        row_iter.for_each(|maze_row| {
+            maze_row.iter().for_each(|maze_cell| {
+                match maze_cell {
+                    c if c == cell => { 
+                        print!("@")
+                    }
+                    c if c.is_wall => {
+                        print!("#")
+                    }
+                    _ => {
+                        print!(".")
+                    }
+                };
+            });
+            print!("\n")
+        });
     }
 }
 

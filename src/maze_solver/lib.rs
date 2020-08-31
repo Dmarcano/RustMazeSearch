@@ -4,6 +4,7 @@ use std::collections::VecDeque;
 
 use super::maze::*;
 use super::solver::*;
+use super::display::*;
 
 /**
  * Runs the program for searching a maze with a type of search algorthtm
@@ -12,9 +13,11 @@ pub fn run (path : &Path, algo : SearchAlgo) {
     let file = File::open(path).unwrap();
     let maze = MazePositionMaze::new(file);
 
+    let display = MazePositionDisplay::new(&maze, 10);
+
     match algo {
-        SearchAlgo::BFS => {search_maze(VecDeque::new(), &maze, print_cell);}
-        SearchAlgo::DFS => {search_maze(Vec::new(), &maze, print_cell);}
+        SearchAlgo::BFS => {search_maze(VecDeque::new(), &maze, display);}
+        SearchAlgo::DFS => {search_maze(Vec::new(), &maze, display);}
     };
 }
 

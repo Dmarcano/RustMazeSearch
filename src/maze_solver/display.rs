@@ -17,6 +17,8 @@ impl<'a> MazePositionDisplay<'a> {
 
 impl<'a> MazeDisplay for MazePositionDisplay<'a> {
     fn print_maze_position(&self, cell : &MazePosition) { 
+
+        println!("=============");
         let row_iter = self.maze.iter_rows() ;  
         row_iter.for_each(|maze_row| {
             maze_row.iter().for_each(|maze_cell| {

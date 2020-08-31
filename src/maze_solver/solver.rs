@@ -1,4 +1,5 @@
 use super::maze::*;
+use super::display::*;
 use std::collections::HashSet;
 use std::collections::VecDeque;
 
@@ -37,16 +38,17 @@ impl<T> Exploration<T> for VecDeque<T> {
 }
 
 // Search a Maze using a structure which implements Maze exploration, performing a function on every Maze cell found
-pub fn search_maze<'a, T, U>(mut exploration :  T, maze : &'a U, func : fn(&MazePosition) )
+pub fn search_maze<'a, T, U, V>(mut exploration :  T, maze : &'a U, display : V )
     where T : Exploration<&'a MazePosition>,
-    U : Maze<MazePosition> {
+    U : Maze<MazePosition>, 
+    V: MazeDisplay {
     let mut seen_cells : HashSet<&MazePosition> = HashSet::new();
     let start = maze.get_start();
     seen_cells.insert(start);
     exploration.give(start);
 
     while let Some(curr_cell) = exploration.take() { 
-        func(curr_cell); // perform operation on maze cell
+        display.print_maze_position(curr_cell); // perform operation on maze cell
         seen_cells.insert(curr_cell);
         maze.get_neighbors(curr_cell).iter()
         .filter(|n| !seen_cells.contains(**n) && !n.is_wall)

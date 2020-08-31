@@ -154,7 +154,6 @@ impl<'a> Iterator for MazePositionIter<'a> {
 #[cfg(test)]
 mod tests { 
     use super::*;
-    use std::path::Path;
 
     #[test]
     fn into_iter_test() {

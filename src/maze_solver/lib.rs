@@ -33,7 +33,3 @@ pub enum SearchAlgo {
     // Breadth first search: Searches each branch of all paths equally deep until all paths are exhauset
     BFS
 }
-
-fn print_cell(val : &MazePosition) { 
-    println!("{:?}", val )
-}

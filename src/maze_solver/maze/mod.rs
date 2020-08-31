@@ -9,8 +9,8 @@ pub mod maze_position;
  */
 #[derive(Debug, PartialEq, Eq, Hash, Copy, Clone)]
 pub struct MazePosition {
-    x : u64,
-    y: u64,
+    pub x : u64,
+    pub y: u64,
     pub is_wall : bool,
     pub is_goal : bool
 }
@@ -21,8 +21,8 @@ pub struct MazePosition {
 #[derive(Debug, PartialEq, Eq)]
 pub struct MazePositionMaze {
     maze : Vec<Vec<MazePosition>>,
-    width : u64,
-    height : u64
+    pub width : u64,
+    pub height : u64
 }
 
 

@@ -98,7 +98,6 @@ fn parse_maze_row(line : String, row_idx : u64, width : u64) -> Vec<MazePosition
 
 #[cfg(test)]
 mod tests {
-    use super::super::*;
     use super::*;
     use std::path::Path;
 

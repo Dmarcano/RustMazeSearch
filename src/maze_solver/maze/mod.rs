@@ -126,4 +126,18 @@ impl<'a> Iterator for MazePositionIter<'a> {
     }
 }
 
+#[cfg(test)]
+mod tests { 
+    use super::*;
 
+    #[test]
+    fn iter_test() {
+      
+    }
+
+    #[test]
+    fn into_iter_test() {
+    
+        
+    }
+}

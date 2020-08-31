@@ -80,60 +80,29 @@ impl Iterator for MazePositionIntoIter {
 }
 
 // helper struct for Maze Iterator
-pub struct MazePositionIter<'a> { 
-    iter : ::std::slice::Iter<'a, &'a MazePosition>
+pub struct MazePositionIter<'a> {
+    maze : &'a MazePositionMaze,
+    cur_row_idx : u64,
+    cur_col_idx : u64, 
     // iter: ::std::vec::IntoIter<&'a &'a MazePosition>
-
-
 }
 
 impl MazePositionMaze { 
     pub fn iter<'a> (&'a self) -> MazePositionIter<'a>{
-
-        // let val = self.maze.iter() 
-        //     .flat_map(|v| v.iter())
-        //     .collect::<Vec<&'a MazePosition>>()
-        //     .iter();
-        let mut val : Vec<&MazePosition> = Vec::new();
-        for vec in &self.maze { 
-            for cell in vec {
-                val.push(cell);
-            }
-        }
-
+        let mut val = self.maze.iter() ;
             MazePositionIter{
-                iter : val.iter()
+                maze : &self,
+                cur_col_idx : 0, 
+                cur_row_idx : 0
             }
-
-        // unimplemented!()
-        // MazePositionIter { 
-        //     iter: self.maze.iter()
-        //     .flat_map(|v| v.iter())
-        //     .collect::<Vec<&'a  MazePosition>>()
-        //     .iter()
-        //     // .flatten()
-        //     // .collect::<Vec<MazePosition>>()
-            
-        // }
      }
 }
-
-// impl<'a> IntoIterator for &'a MazePositionMaze {
-
-//     type Item = &'a &'a MazePosition;
-//     type IntoIter =  MazePositionIter<'a>;
-
-//     fn into_iter(self) -> Self::IntoIter { 
-//         unimplemented!()
-//     }
-
-// }
 
 impl<'a> Iterator for MazePositionIter<'a> {
     type Item = &'a &'a MazePosition;
 
     fn next(&mut self)-> Option<Self::Item> { 
-        self.iter.next()
+        unimplemented!()
     }
 }
 

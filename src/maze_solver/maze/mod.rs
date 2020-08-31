@@ -129,15 +129,41 @@ impl<'a> Iterator for MazePositionIter<'a> {
 #[cfg(test)]
 mod tests { 
     use super::*;
+    use std::path::Path;
 
     #[test]
-    fn iter_test() {
+    fn into_iter_test() {
       
     }
 
     #[test]
-    fn into_iter_test() {
-    
+    fn iter_test() {
+        let num_rows = 2;
+        let num_cols = 3;
+        let rows = 0..num_rows;
+
+        let maze_vec = rows.map(
+            |r| {
+                create_maze_row(r, num_cols)
+            }
+        ).collect::<Vec<Vec<MazePosition>>>();
+
+        let maze = MazePositionMaze { maze : maze_vec, width : num_cols, height : num_rows};
         
+        let mut iter = maze.iter();
+        assert_eq!(iter.next(), Some(&MazePosition{x : 0, y: 0 , is_goal : false, is_wall: false}));
+        assert_eq!(iter.next(), Some(&MazePosition{x : 1, y: 0 , is_goal : false, is_wall: false}));
+        assert_eq!(iter.next(), Some(&MazePosition{x : 2, y: 0 , is_goal : false, is_wall: false}));
+        assert_eq!(iter.next(), Some(&MazePosition{x : 0, y: 1 , is_goal : false, is_wall: false}));
+        assert_eq!(iter.next(), Some(&MazePosition{x : 1, y: 1 , is_goal : false, is_wall: false}));
+        assert_eq!(iter.next(), Some(&MazePosition{x : 2, y: 1 , is_goal : false, is_wall: false}));
+        assert_eq!(iter.next(), None);
+    }
+
+    fn create_maze_row(row_idx : u64, num_cols : u64) -> Vec<MazePosition> {
+        let cols = 0..num_cols;
+        cols.map( 
+            |c| MazePosition{x : c, y: row_idx , is_goal : false, is_wall: false}
+        ).collect::<Vec<MazePosition>>()
     }
 }

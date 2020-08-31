@@ -99,10 +99,30 @@ impl MazePositionMaze {
 }
 
 impl<'a> Iterator for MazePositionIter<'a> {
-    type Item = &'a &'a MazePosition;
+    type Item =  &'a MazePosition;
 
     fn next(&mut self)-> Option<Self::Item> { 
-        unimplemented!()
+        match self.cur_row_idx {
+            y if y >= self.maze.height => {
+                // have gone down all rows and have exhausted iter
+                return None
+            }
+            y => {
+                // go down cols until reach end then reset
+                match self.cur_col_idx { 
+                    x if x >= self.maze.width => {
+                        // if exhausted a row, reset col, go to next row 
+                        self.cur_col_idx = 0; 
+                        self.cur_row_idx += 1;
+                        return self.next() // recurse to next row
+                    }
+                    x => {
+                        self.cur_col_idx += 1;
+                        return Some(self.maze.get(x, y))
+                    }
+                }
+            }
+        } 
     }
 }
 

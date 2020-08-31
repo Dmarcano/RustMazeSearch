@@ -93,7 +93,7 @@ impl <'a> Iterator for MazeRowIter<'a> {
 
 impl MazePositionMaze { 
 
-    pub fn iter_row(&self) -> MazeRowIter{ 
+    pub fn iter_rows(&self) -> MazeRowIter{ 
         MazeRowIter {
              iter : self.maze.iter()
         }
@@ -206,7 +206,7 @@ mod tests {
     }
 
     #[test]
-    fn iter_row_test() {
+    fn iter_rows_test() {
         let num_rows = 2;
         let num_cols = 3;
         let rows = 0..num_rows;
@@ -218,7 +218,7 @@ mod tests {
         ).collect::<Vec<Vec<MazePosition>>>();
 
         let maze = MazePositionMaze { maze : maze_vec, width : num_cols, height : num_rows};
-        let mut row_iter = maze.iter_row();
+        let mut row_iter = maze.iter_rows();
         assert_eq!(Some(&vec![
             MazePosition{x : 0, y: 0 , is_goal : false, is_wall: false},
             MazePosition{x : 1, y: 0 , is_goal : false, is_wall: false},

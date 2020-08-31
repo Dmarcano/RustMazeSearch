@@ -17,7 +17,7 @@ impl<'a> MazePositionDisplay<'a> {
 
 impl<'a> MazeDisplay for MazePositionDisplay<'a> {
     fn print_maze_position(&self, cell : &MazePosition) { 
-        let iter = self.maze.iter();
+        let row_iter = self.maze.iter_rows() ;
         
         unimplemented!("Have to implement Maze display for Maze position")
     }

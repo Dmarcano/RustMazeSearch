@@ -1,4 +1,5 @@
 use super::maze::*;
+use termion::color;
 
 /**
  * A struct that carries a reference to a Maze so that current position may be displayed along 
@@ -6,11 +7,11 @@ use super::maze::*;
  */
 pub struct MazePositionDisplay<'a> { // we have lifetime of Struct that goes along with the reference
     maze : &'a MazePositionMaze,
-    delay : u32
+    delay : u64
 }
 
 impl<'a> MazePositionDisplay<'a> { 
-    pub fn new(maze :  &'a MazePositionMaze, delay : u32) -> MazePositionDisplay {
+    pub fn new(maze :  &'a MazePositionMaze, delay : u64) -> MazePositionDisplay {
         MazePositionDisplay{maze, delay}
     }
 
@@ -18,13 +19,13 @@ impl<'a> MazePositionDisplay<'a> {
         row.iter().for_each(|maze_cell| {
             match maze_cell {
                 c if c == cell => { 
-                    print!("@")
+                    print!("{}@", color::Fg(color::Red))
                 }
                 c if c.is_wall => {
-                    print!("#")
+                    print!("{}#", color::Fg(color::Blue))
                 }
                 _ => {
-                    print!(".")
+                    print!("{}.", color::Fg(color::White))
                 }
             };
         });
@@ -43,8 +44,9 @@ impl<'a> MazeDisplay for MazePositionDisplay<'a> {
             y if y + 2 >= self.maze.height =>  self.maze.height, 
             y => y + 2
         };
-        
-        println!("=============");
+
+        let duration = std::time::Duration::from_millis(self.delay);
+
         let row_iter = self.maze.iter_rows().enumerate();
         row_iter.filter(|(idx, _)| {
             match *idx { 
@@ -53,6 +55,9 @@ impl<'a> MazeDisplay for MazePositionDisplay<'a> {
                 _ => true
             }
         }).for_each(|(_, row)| self.prin_maze_row(row, cell));
+
+        std::thread::sleep(duration);
+        print!("{}[2J", 27 as char);
     }
 }
 

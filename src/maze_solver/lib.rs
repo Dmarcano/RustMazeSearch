@@ -13,7 +13,7 @@ pub fn run (path : &Path, algo : SearchAlgo) {
     let file = File::open(path).unwrap();
     let maze = MazePositionMaze::new(file);
 
-    let display = MazePositionDisplay::new(&maze, 10);
+    let display = MazePositionDisplay::new(&maze, 100);
 
     match algo {
         SearchAlgo::BFS => {search_maze(VecDeque::new(), &maze, display);}

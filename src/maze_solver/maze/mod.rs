@@ -111,7 +111,6 @@ pub struct MazePositionIter<'a> {
 
 impl MazePositionMaze { 
     pub fn iter<'a> (&'a self) -> MazePositionIter<'a>{
-        let mut val = self.maze.iter() ;
             MazePositionIter{
                 maze : &self,
                 cur_col_idx : 0, 

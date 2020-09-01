@@ -109,16 +109,6 @@ pub struct MazePositionIter<'a> {
     // iter: ::std::vec::IntoIter<&'a &'a MazePosition>
 }
 
-impl MazePositionMaze { 
-    pub fn iter<'a> (&'a self) -> MazePositionIter<'a>{
-            MazePositionIter{
-                maze : &self,
-                cur_col_idx : 0, 
-                cur_row_idx : 0
-            }
-     }
-}
-
 impl<'a> Iterator for MazePositionIter<'a> {
     type Item =  &'a MazePosition;
 
@@ -177,30 +167,6 @@ mod tests {
         assert_eq!(iter.next(), Some(MazePosition{x : 2, y: 1 , is_goal : false, is_wall: false}));
         assert_eq!(iter.next(), None);
 
-    }
-
-    #[test]
-    fn iter_test() {
-        let num_rows = 2;
-        let num_cols = 3;
-        let rows = 0..num_rows;
-
-        let maze_vec = rows.map(
-            |r| {
-                create_maze_row(r, num_cols)
-            }
-        ).collect::<Vec<Vec<MazePosition>>>();
-
-        let maze = MazePositionMaze { maze : maze_vec, width : num_cols, height : num_rows};
-        
-        let mut iter = maze.iter();
-        assert_eq!(iter.next(), Some(&MazePosition{x : 0, y: 0 , is_goal : false, is_wall: false}));
-        assert_eq!(iter.next(), Some(&MazePosition{x : 1, y: 0 , is_goal : false, is_wall: false}));
-        assert_eq!(iter.next(), Some(&MazePosition{x : 2, y: 0 , is_goal : false, is_wall: false}));
-        assert_eq!(iter.next(), Some(&MazePosition{x : 0, y: 1 , is_goal : false, is_wall: false}));
-        assert_eq!(iter.next(), Some(&MazePosition{x : 1, y: 1 , is_goal : false, is_wall: false}));
-        assert_eq!(iter.next(), Some(&MazePosition{x : 2, y: 1 , is_goal : false, is_wall: false}));
-        assert_eq!(iter.next(), None);
     }
 
     #[test]

@@ -1,6 +1,6 @@
 # RustMazeSearch 
 
-A simple rust project for searching a Maze from given text files
+A small CLI program that solves Mazes built from 
 
 ## TODO: 
 * Display results to user

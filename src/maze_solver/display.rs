@@ -43,22 +43,16 @@ impl<'a> MazeDisplay for MazePositionDisplay<'a> {
             y if y + 2 >= self.maze.height =>  self.maze.height, 
             y => y + 2
         };
-
-        let mut idx = 0;
+        
         println!("=============");
-        let row_iter = self.maze.iter_rows() ;  
-        row_iter.filter(|_| {
-            match idx {
-                _ if idx < start => {
-                    idx += 1;
-                    return false }
-                _ if idx > end => {
-                    idx += 1;
-                    return false
-                }
-                _ => return true 
+        let row_iter = self.maze.iter_rows().enumerate();
+        row_iter.filter(|(idx, _)| {
+            match *idx { 
+                _ if (*idx as u64) < start => false,
+                _ if (*idx as u64) > end => false, 
+                _ => true
             }
-        }).for_each(|maze_row| self.prin_maze_row(maze_row, cell))
+        }).for_each(|(_, row)| self.prin_maze_row(row, cell));
     }
 }
 

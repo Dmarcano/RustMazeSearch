@@ -15,6 +15,12 @@ A small CLI program that solves Mazes built from given text files. Built for the
 ## Long Maze Demo
 ![large demo](https://github.com/Dmarcano/RustMazeSearch/blob/master/public/demos/rust%20maze%20search%20demo%20large.2020-09-06%2014_27_20.gif)
 
+## Running 
+
+* clone the repo 
+* use either ```./run.sh``` or ``` cargo run -- -a DFS -m public/example1.txt``` to run the program with valid arguments
+* NOTE Only those with a Unix shell can properly run this program due to adding color text to the terminal. This functionality has yet to be successfully ported over to Windows machines.
+
 ## TODO: 
 * Write the text solution for a Maze
 * Generate Mazes
